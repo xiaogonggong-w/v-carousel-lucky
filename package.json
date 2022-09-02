@@ -1,0 +1,20 @@
+{
+  "name": "carousel",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "3.2.27"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.0.3",
+    "unplugin-auto-import": "^0.11.2",
+    "unplugin-vue-define-options": "^0.11.1",
+    "vite": "^3.0.7"
+  }
+}
