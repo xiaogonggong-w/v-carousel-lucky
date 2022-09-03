@@ -45,7 +45,7 @@ import Indicator from "./indicator.vue";
 // 获取prop
 import allProps from './props'
 defineOptions({
-  name: "carousel"
+  name: "Carousel"
 })
 const carouselRoot = ref(null)
 const slots = useSlots();

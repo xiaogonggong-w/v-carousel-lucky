@@ -1,7 +1,7 @@
 <script setup>
 import { reactive } from 'vue';
-import CarouselItem from './package/carouselItem.vue';
-import Carousel from './package/carousel.vue';
+// import CarouselItem from './package/carouselItem.vue';
+// import Carousel from './package/carousel.vue';
 const state = reactive({
   data: [
     "https://ns-strategy.cdn.bcebos.com/ns-strategy/upload/fc_big_pic/part-00693-2745.jpg",
@@ -19,21 +19,9 @@ function afterMoving(obj) {
 
 <template>
   <div class="app">
-    <carousel 
-    :autoplay="true"
-    :duration="5000"
-    :initIndex="0" 
-    :direction="true" 
-    directionMode="hover" 
-    :indicator="true"
-    indicatorMode="always" 
-    indicatorColor="white" 
-    :loop="true" 
-    type="card" 
-    indicatorActiveColor="skyblue"
-    :delay="500"
-    @before-moving="beforeMoving" 
-    @after-moving="afterMoving">
+    <carousel :autoplay="true" :duration="5000" :initIndex="0" :direction="true" directionMode="hover" :indicator="true"
+      indicatorMode="always" indicatorColor="white" :loop="true" type="card" indicatorActiveColor="skyblue" :delay="500"
+      @before-moving="beforeMoving" @after-moving="afterMoving">
       <carousel-item v-for="(item, index) in state.data" :key="index" class="item">
         <div class="h">{{ index }}</div>
       </carousel-item>

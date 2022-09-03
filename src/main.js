@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import './style.css'
 import App from './App.vue'
+import CarouselUi from './package/index'
 
-createApp(App).mount('#app')
+createApp(App).use(CarouselUi).mount('#app')

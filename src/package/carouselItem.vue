@@ -10,7 +10,7 @@ import {
   computed
 } from "vue";
 defineOptions({
-  name: "carouselItem"
+  name: "CarouselItem"
 })
 const props = defineProps({
   idx: {
