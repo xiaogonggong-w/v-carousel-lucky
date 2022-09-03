@@ -1,10 +1,10 @@
 import Carousel from './carousel.vue';
 import CarouselItem from './CarouselItem.vue';
-Carousel.install = (vue) => {
-    vue.component(Carousel.name, Carousel)
+Carousel.install = (App) => {
+    App.component("Carousel", Carousel)
 }
-CarouselItem.install = (vue) => {
-    vue.component(CarouselItem.name, CarouselItem)
+CarouselItem.install = (App) => {
+    App.component("CarouselItem", CarouselItem)
 }
 
 const components = [
@@ -12,8 +12,10 @@ const components = [
 ]
 
 // 全局加载
-const install = (vue) => {
-    components.map(component => vue.use(component))
+const install = (App) => {
+    components.forEach(component => {
+        App.use(component)
+    })
 }
 if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue)

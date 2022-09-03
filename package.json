@@ -1,19 +1,43 @@
 {
-  "name": "carousel",
-  "private": true,
-  "version": "0.0.0",
+  "name": "v-carousel-lucky",
+  "files": [
+    "dist"
+  ],
+  "private": false,
+  "version": "0.0.8",
+  "description": "vue3版本的跑马灯",
+  "main": "dist/lib.umd.js",
+  "module": "dist/lib.es.js",
+  "style": "dist/style.css",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/lib.es.js",
+      "require": "./dist/lib.umd.js"
+    },
+    "./*": "./*"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
+  },
+  "keywords": [
+    "vue3",
+    "vite",
+    "carousel",
+    "component",
+    "ui"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": "16.15.1"
   },
   "dependencies": {
     "vue": "3.2.27"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.3",
-    "unplugin-auto-import": "^0.11.2",
     "unplugin-vue-define-options": "^0.11.1",
     "vite": "^3.0.7"
   }
