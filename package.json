@@ -5,7 +5,7 @@
   ],
   "private": false,
   "version": "1.0.0",
-  "description": "vue3版本的跑马灯",
+  "description": "vue3版本的走马灯",
   "main": "dist/lib.umd.js",
   "module": "dist/lib.es.js",
   "style": "dist/style.css",
@@ -18,7 +18,8 @@
     "./*": "./*"
   },
   "scripts": {
-    "dev":"vite",
+    "dev": "vite",
+    "docs:dev": "vitepress dev docs",
     "build": "vite build"
   },
   "keywords": [
@@ -43,6 +44,7 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.3",
     "unplugin-vue-define-options": "^0.11.1",
-    "vite": "^3.0.7"
+    "vite": "^3.0.7",
+    "vitepress": "1.0.0-alpha.13"
   }
 }

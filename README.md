@@ -1,5 +1,5 @@
 # v-carousel-lucky
-`vue3`版本的跑马灯
+`vue3`版本的走马灯
 
 # 安装
 ```

@@ -106,7 +106,7 @@ const W = (r, i) => {
   },
   delay: {
     type: Number,
-    default: 0.3
+    default: 300
   }
 };
 const te = (r) => (ue("data-v-097fc2bf"), r = r(), de(), r), he = { class: "direction-container" }, xe = /* @__PURE__ */ te(() => /* @__PURE__ */ w("i", { class: "iconfont icon-anniu_jiantouxiangzuo_o" }, null, -1)), ge = [

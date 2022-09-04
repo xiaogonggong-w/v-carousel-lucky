@@ -48,6 +48,6 @@ export default {
     },
     delay: {
         type: Number,
-        default: 0.3
+        default: 300
     }
 }

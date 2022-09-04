@@ -1,0 +1,27 @@
+export default {
+    title: "v-carousel-lucky", // 标题
+    // description: 'Life is short, Keep it simple.', // 描述信息
+    themeConfig: {
+        nav: [
+            { text: "使用", link: "/guide/vueInstallation.md" },
+            { text: "文档", link: "" },
+        ],
+        socialLinks: [{ icon: "github", link: "https://github.com/xiaogonggong-w/v-carousel-lucky" }],
+        sidebar: {
+            "/guide/": [
+                {
+                    text: "使用",
+                    items: [
+                        {
+                            text: "在Vue中使用",
+                            link: "/guide/vueInstallation.md"
+                        }
+                    ]
+                }
+            ],
+            "/config/": [
+
+            ]
+        }
+    }
+};
