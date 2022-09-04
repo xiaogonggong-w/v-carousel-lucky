@@ -1,6 +1,7 @@
 export default {
     title: "v-carousel-lucky", // 标题
     // description: 'Life is short, Keep it simple.', // 描述信息
+    base: "/v-carousel-lucky/",
     themeConfig: {
         nav: [
             { text: "使用", link: "/guide/vueInstallation.md" },
