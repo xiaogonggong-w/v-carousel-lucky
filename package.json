@@ -20,7 +20,10 @@
   "scripts": {
     "dev": "vite",
     "docs:dev": "vitepress dev docs",
-    "build": "vite build"
+    "docs:build": "vitepress build docs",
+    "build": "vite build",
+    "deploy": "gh-pages -d docs/.vitepress/dist",
+    "deploy:build": "pnpm run docs:build && gh-pages -d docs/.vitepress/dist"
   },
   "keywords": [
     "vue3",
@@ -43,6 +46,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.3",
+    "gh-pages": "^4.0.0",
     "unplugin-vue-define-options": "^0.11.1",
     "vite": "^3.0.7",
     "vitepress": "1.0.0-alpha.13"

@@ -4,7 +4,7 @@ export default {
     themeConfig: {
         nav: [
             { text: "使用", link: "/guide/vueInstallation.md" },
-            { text: "文档", link: "" },
+            { text: "配置项", link: "/guide/carousel-config.md" },
         ],
         socialLinks: [{ icon: "github", link: "https://github.com/xiaogonggong-w/v-carousel-lucky" }],
         sidebar: {
@@ -15,12 +15,12 @@ export default {
                         {
                             text: "在Vue中使用",
                             link: "/guide/vueInstallation.md"
+                        }, {
+                            text: "配置项",
+                            link: "/guide/carousel-config.md"
                         }
                     ]
                 }
-            ],
-            "/config/": [
-
             ]
         }
     }
