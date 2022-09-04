@@ -1,19 +1,17 @@
 <template>
   <div class="indicator" v-if="state.indicator">
     <span v-for="item in state.len" :key="item" :style="{
-      backgroundColor:
-      state.globalIndex === item - 1 ? state.indicatorActiveColor : state.indicatorColor,
       width: state.globalIndex === item - 1 ? '20px' : '',
-    }" @click="DicatorClick(item - 1)"></span>
+    }" @click="DictatorClick(item - 1)" :class="state.globalIndex === item - 1 ? 'active' : 'normal'"></span>
   </div>
 </template>
 
 <script setup>
 import { reactive, watch, inject, defineEmits } from "vue";
 defineOptions({
-  name:"indicator"
+  name: "indicator"
 })
-const emit = defineEmits(["DicatorClick", "before-moving", "after-moving"])
+const emit = defineEmits(["DictatorClick", "before-moving", "after-moving"])
 const carouselCtxState = inject("carouselCtxState");
 const carouselCtxProps = carouselCtxState.propsStaging;
 const state = reactive({
@@ -29,13 +27,13 @@ watch(
     state.globalIndex = v;
   }
 );
-const DicatorClick = (idx) => {
+const DictatorClick = (idx) => {
   if (idx !== state.globalIndex) {
     // 当点击的不是同一个所以我就
     let direction = "next";
     idx > state.globalIndex ? (direction = "next") : (direction = "prev");
     emit("before-moving", { index: state.globalIndex, direction }); // 滚动前
-    emit("DicatorClick", idx); // 开始滚动
+    emit("DictatorClick", idx); // 开始滚动
     emit("after-moving", { index: idx, direction }); // 滚动后
   }
 };
@@ -64,5 +62,13 @@ const DicatorClick = (idx) => {
 
 .indicator span+span {
   margin-left: 10px;
+}
+
+.indicator span.active {
+  background-color: #DCDCDC;
+}
+
+.indicator span.normal {
+  background-color: #fff;
 }
 </style>

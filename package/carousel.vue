@@ -19,7 +19,7 @@
     </div>
 
     <Indicator v-show="state.showIndicator" @before-moving="beforeEmit" @after-moving="afterEmit"
-      @DicatorClick="DicatorClick" />
+      @DictatorClick="DictatorClick" />
   </div>
 </template>
 
@@ -129,11 +129,11 @@ const start = (direction) => debounce(() => startDebounce(direction), props.dela
 
 
 // 指示灯
-const DicatorClick = (idx) => {
+const DictatorClick = (idx) => {
   // 如果是从 右 换到 左
-  if (idx < state.currentIndex) {
-    changeLeftTranslate();
-  }
+  // if (idx < state.currentIndex) {
+  //   changeLeftTranslate();
+  // }
   state.currentIndex = idx;
   resetItemsPosition();
 };
