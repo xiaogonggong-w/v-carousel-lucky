@@ -4,7 +4,7 @@
     "dist"
   ],
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "vue3版本的走马灯",
   "main": "dist/lib.umd.js",
   "module": "dist/lib.es.js",
@@ -36,7 +36,7 @@
     "type": "git",
     "url": "https://github.com/xiaogonggong-w/v-carousel-lucky"
   },
-  "homepage": "",
+  "homepage": "https://xiaogonggong-w.github.io/v-carousel-lucky/",
   "license": "MIT",
   "engines": {
     "node": "16.15.1"
