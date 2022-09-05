@@ -23,6 +23,7 @@ let vertical = ref('X')
 const carouselCtxState = inject('carouselCtxState');
 let isActive = ref(false);
 let isStage = ref(false)
+let ready = ref(false)
 const instance = inject('instance')
 watch(
   () => carouselCtxState.currentIndex,
@@ -47,6 +48,7 @@ const itemStyle = computed(() => {
     transform,
   }
 })
+
 
 const parentsWidth = computed(() => {
   return instance.carouselRoot.value?.offsetWidth || 0;
@@ -110,6 +112,7 @@ const setItemStyle = (index, activeItem, prev) => {
   } else {
     translate.value = setTranslate(index, activeItem);
   }
+  ready.value = true
 }
 
 onMounted(() => {
@@ -120,7 +123,7 @@ onMounted(() => {
 </script>
   
 <template>
-  <div class="carousel-item"
+  <div class="carousel-item" v-show="ready"
     :style="[itemStyle, { '--delay': carouselCtxState.delay + 's' }, { '--width': carouselCtxState.cardWidth }]"
     :class="[returnClass('is-active', isActive), returnClass('is-stage', isStage), returnClass('is-card', carouselCtxState.type === 'card')]">
     <slot></slot>
