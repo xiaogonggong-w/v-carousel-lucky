@@ -54,8 +54,8 @@ function afterMoving(after) {
     :loop="true" 
     type="card"  
     :delay="500"
-    @before-moving="beforeMoving" 
-    @after-moving="afterMoving">
+    @before-move="beforeMoving" 
+    @change-move="afterMoving">
       <carousel-item v-for="item in 3" :key="item" class="item">
         <div class="h">{{ item }}</div>
       </carousel-item>
@@ -92,15 +92,28 @@ function afterMoving(after) {
 
 # Attribute
 
-|     名称      |        介绍        |    可选值    |   默认值    |
-| :-----------: | :----------------: | :----------: | :---------: |
-|   duration    |   轮播延迟的时间   |      -       |   3000ms    |
-|   autoplay    |    是否自动轮播    |  true/false  |    true     |
-|   initIndex   |  初始化展示的item  |      -       | 0（第一个） |
-|   direction   |  是否展示切换按钮  |  true/false  |    true     |
-| directionMode | 切换按钮展示的方式 | always/hover |   always    |
-|   indicator   |   指示灯是否展示   |  true/false  |    true     |
-| indicatorMode |   指示灯展示方式   | always/hover |   always    |
-|     type      |   carousel的类型   |     card     |      -      |
-|     loop      |    是否循环轮播    |  true/false  |    true     |
-|   delay            |        切换过渡时的事件            |       -        |      300       |
+|       名称        |               介绍               |     可选值     |   默认值    |
+| :---------------: | :------------------------------: | :------------: | :---------: |
+|       width       |            轮播的宽度            |       -        |    400px    |
+|      height       | 轮播的高度（不包含指示灯的高度） |       -        |    300px    |
+|     duration      |          轮播延迟的时间          |       -        |   3000ms    |
+|     autoplay      |           是否自动轮播           |   true/false   |    true     |
+|     initIndex     |         初始化展示的item         |       -        | 0（第一个） |
+|     direction     |         是否展示切换按钮         |   true/false   |    true     |
+|   directionMode   |        切换按钮展示的方式        |  always/hover  |   always    |
+|     indicator     |          指示灯是否展示          |   true/false   |    true     |
+|   indicatorMode   |          指示灯展示方式          |  always/hover  |   always    |
+| indicatorPosition |       指示灯在外部还是内部       | inside/outside |   inside    |
+| indicatorTrigger  |          指示灯触发方式          |  hover/click   |    hover    |
+|       type        |          carousel的类型          |      card      |      -      |
+|       loop        |           是否循环轮播           |   true/false   |    true     |
+|       delay       |         切换过渡时的事件         |       -        |     300     |
+|       scale       |         幻灯片缩小的比例         |       小于1       |     0.8     |
+|       cardWidth       |         激活幻灯片的宽度         |       小于整体宽度       |     50%     |
+
+# Event
+
+|    名称     |          介绍          |           参数            |
+| :---------: | :--------------------: | :-----------------------: |
+| before-move | 目前激活幻灯片的前一个 | Object=>(index,direction) |
+| change-move |    目前激活的幻灯片    | Object=>(index,direction) |

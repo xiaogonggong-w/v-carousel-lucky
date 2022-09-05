@@ -26,7 +26,7 @@ const W = (r, i) => {
 }, pe = ["onClick"], ve = V({
   name: "indicator"
 }), Ie = /* @__PURE__ */ Object.assign(ve, {
-  emits: ["DictatorClick", "before-moving", "after-moving"],
+  emits: ["indicatorClick", "before-move", "change-move"],
   setup(r, { emit: i }) {
     const o = B("carouselCtxState"), u = o.propsStaging, a = H({
       len: o.CAROUSEL_ITEM_LEN,
@@ -44,7 +44,7 @@ const W = (r, i) => {
     const p = (d) => {
       if (d !== a.globalIndex) {
         let f = "next";
-        d > a.globalIndex ? f = "next" : f = "prev", i("before-moving", { index: a.globalIndex, direction: f }), i("DictatorClick", d), i("after-moving", { index: d, direction: f });
+        d > a.globalIndex ? f = "next" : f = "prev", i("before-move", { index: a.globalIndex, direction: f }), i("indicatorClick", d), i("change-move", { index: d, direction: f });
       }
     };
     return (d, f) => l(a).indicator ? (C(), b("div", _e, [
@@ -117,7 +117,7 @@ const te = (r) => (ue("data-v-097fc2bf"), r = r(), de(), r), he = { class: "dire
   name: "Carousel"
 }), Se = /* @__PURE__ */ Object.assign(we, {
   props: ye,
-  emits: ["before-moving", "after-moving"],
+  emits: ["before-move", "change-move"],
   setup(r, { emit: i }) {
     const o = r, u = m(null), a = ce(), {
       containerWidth: p,
@@ -147,9 +147,9 @@ const te = (r) => (ue("data-v-097fc2bf"), r = r(), de(), r), he = { class: "dire
     }, T = (s) => {
       y.value.push(s);
     }, k = (s) => {
-      i("before-moving", s);
+      i("before-move", s);
     }, M = (s) => {
-      i("after-moving", s);
+      i("change-move", s);
     }, e = (s) => {
       switch (k({ index: t.currentIndex, direction: s }), s) {
         case "prev":
@@ -223,7 +223,7 @@ const te = (r) => (ue("data-v-097fc2bf"), r = r(), de(), r), he = { class: "dire
       A(R(me, {
         onBeforeMoving: k,
         onAfterMoving: M,
-        onDictatorClick: c
+        onindicatorClick: c
       }, null, 512), [
         [O, l(t).showIndicator]
       ])

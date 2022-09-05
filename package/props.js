@@ -1,11 +1,12 @@
+export const CARD_SCALE = 0.8
 export default {
-    containerWidth: { // 宽度
+    width: { // 宽度
         type: String,
-        default: "100%",
+        default: "400px", // 宽度
     },
-    containerHeight: { // 高度
+    height: { // 高度
         type: String,
-        default: "100%",
+        default: "300px",//默认300像素
     },
     duration: { // 轮播延迟时间
         type: Number,
@@ -35,6 +36,15 @@ export default {
         type: String,
         default: "always", // always || hover
     },
+    indicatorPosition: { // 底部指示灯位置
+        type: String,
+        default: "inside"//inside or outside
+
+    },
+    indicatorTrigger: {
+        type: String,
+        default: "hover"
+    },
     type: {
         type: String,
         validator: (value) => {
@@ -49,5 +59,13 @@ export default {
     delay: {
         type: Number,
         default: 300
+    },
+    scale: {
+        type: Number,
+        default: CARD_SCALE
+    },
+    cardWidth: {
+        type: String,
+        default: "50%"
     }
 }

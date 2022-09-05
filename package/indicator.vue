@@ -1,8 +1,9 @@
 <template>
-  <div class="indicator" v-if="state.indicator">
+  <div class="indicator" v-if="state.indicator" :class="state.indicatorPosition === 'inside' ? 'absolute' : 'static'">
     <span v-for="item in state.len" :key="item" :style="{
       width: state.globalIndex === item - 1 ? '20px' : '',
-    }" @click="DictatorClick(item - 1)" :class="state.globalIndex === item - 1 ? 'active' : 'normal'"></span>
+    }" @click="indicatorClick(item - 1)" @mouseenter="indictorTrigger(item - 1)"
+      :class="state.globalIndex === item - 1 ? 'active' : 'normal'"></span>
   </div>
 </template>
 
@@ -11,7 +12,7 @@ import { reactive, watch, inject, defineEmits } from "vue";
 defineOptions({
   name: "indicator"
 })
-const emit = defineEmits(["DictatorClick", "before-moving", "after-moving"])
+const emit = defineEmits(["indicatorClick", "before-move", "change-move"])
 const carouselCtxState = inject("carouselCtxState");
 const carouselCtxProps = carouselCtxState.propsStaging;
 const state = reactive({
@@ -20,6 +21,8 @@ const state = reactive({
   indicator: carouselCtxProps.indicator,
   indicatorColor: carouselCtxProps.indicatorColor,
   indicatorActiveColor: carouselCtxProps.indicatorActiveColor,
+  indicatorPosition: carouselCtxProps.indicatorPosition,
+  indicatorTrigger: carouselCtxState.indicatorTrigger
 });
 watch(
   () => carouselCtxState.currentIndex,
@@ -27,34 +30,47 @@ watch(
     state.globalIndex = v;
   }
 );
-const DictatorClick = (idx) => {
+const indicatorClick = (idx) => {
   if (idx !== state.globalIndex) {
     // 当点击的不是同一个所以我就
     let direction = "next";
     idx > state.globalIndex ? (direction = "next") : (direction = "prev");
-    emit("before-moving", { index: state.globalIndex, direction }); // 滚动前
-    emit("DictatorClick", idx); // 开始滚动
-    emit("after-moving", { index: idx, direction }); // 滚动后
+    emit("before-move", { index: state.globalIndex, direction }); // 滚动前
+    emit("indicatorClick", idx); // 开始滚动
+    emit("change-move", { index: idx, direction }); // 滚动后
   }
 };
-
+const indictorTrigger = (idx) => {
+  if (state.indicatorTrigger === 'hover') {
+    indicatorClick(idx)
+  }
+}
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .indicator {
-  position: absolute;
+
   display: flex;
   justify-content: center;
   align-items: flex-end;
   width: 100%;
   /* 不会遮挡住 切换按钮 */
-  height: 1px;
-  bottom: 10px;
+  height: 10px;
   z-index: 100;
+
+  &.absolute {
+    position: absolute;
+    bottom: 10px;
+  }
+
+  &.static {
+    position: static;
+  }
+
 }
 
 .indicator span {
-  width: 10px;
+  width: 15px;
   height: 3px;
   cursor: pointer;
   transition: all 0.5s;
@@ -65,10 +81,10 @@ const DictatorClick = (idx) => {
 }
 
 .indicator span.active {
-  background-color: #DCDCDC;
+  background-color: #F5F5F5;
 }
 
 .indicator span.normal {
-  background-color: #fff;
+  background-color: #BDBDBD;
 }
 </style>

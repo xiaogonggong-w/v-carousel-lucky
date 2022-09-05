@@ -2,28 +2,19 @@
 import {
   watch,
   reactive,
-  toRefs,
   inject,
-  defineProps,
   ref,
   onMounted,
   computed
 } from "vue";
+import { CARD_SCALE } from './props'
 defineOptions({
   name: "CarouselItem"
 })
-const props = defineProps({
-  idx: {
-    type: Number,
-    default: 0,
-  },
-})
-// 获取每个子组件图片的索引
-const { idx } = toRefs(props);
 const state = reactive({
   globalIndex: 0,
 });
-const CARD_SCALE = 0.8;
+
 // 伸缩
 let scale = ref(1);
 let translate = ref(0);
@@ -88,11 +79,18 @@ const setTranslate = (index, activeItem) => {
 }
 // 卡片模式下
 const calculateTranslate = (index, activeIndex, parentWidth) => {
-  if (isStage.value) {
-    return parentWidth * ((2 - CARD_SCALE) * (index - activeIndex) + 1) / 4;
+  if (isStage.value) { //左右两个和当前的
+    if (index === activeIndex && carouselCtxState.type === 'card' && carouselCtxState.cardWidth && carouselCtxState.cardWidth !== '50%') {
+      //  激活的幻灯片和在卡片模式下
+      return (parentWidth - parseInt(carouselCtxState.cardWidth.replace("px", ""))) / 2;
+    } else {
+      return parentWidth * ((2 - CARD_SCALE) * (index - activeIndex) + 1) / 4;
+    }
+
   } else if (index < activeIndex) {
     return -(1 + CARD_SCALE) * parentWidth / 4;
   } else {
+    console.log(index, activeIndex);
     return (3 + CARD_SCALE) * parentWidth / 4;
   }
 }
@@ -104,9 +102,11 @@ const setItemStyle = (index, activeItem, prev) => {
     index = resetIndex(index, activeItem, len)
   }
   if (carouselCtxState.type === 'card') {
+    // 左右两个和目前激活的
     isStage.value = Math.round(Math.abs(index - activeItem)) <= 1;
     translate.value = calculateTranslate(index, activeItem, parentsWidth.value);
-    scale.value = active ? 1 : CARD_SCALE;
+    console.log(translate.value);
+    scale.value = active ? 1 : carouselCtxState.scale > 1 ? CARD_SCALE : carouselCtxState.scale;
   } else {
     translate.value = setTranslate(index, activeItem);
   }
@@ -120,29 +120,39 @@ onMounted(() => {
 </script>
   
 <template>
-  <div class="CarouselItem" :style="[itemStyle, { '--delay': carouselCtxState.delay + 's' }]"
-    :class="[returnClass('is-active', isActive), returnClass('is-card', carouselCtxState.type === 'card')]">
+  <div class="carousel-item"
+    :style="[itemStyle, { '--delay': carouselCtxState.delay + 's' }, { '--width': carouselCtxState.cardWidth }]"
+    :class="[returnClass('is-active', isActive), returnClass('is-stage', isStage), returnClass('is-card', carouselCtxState.type === 'card')]">
     <slot></slot>
   </div>
 </template>
 
 
-<style scoped>
-.CarouselItem {
+<style scoped lang="scss">
+.carousel-item {
   position: absolute;
   height: 100%;
   width: 100%;
+  display: inline-block;
   top: 0;
   left: 0;
   transition: all var(--delay);
   z-index: 1;
-}
 
-.CarouselItem.is-card {
-  width: 50%;
-}
+  &.is-card {
+    width: 50%;
+  }
 
-.CarouselItem.is-active {
-  z-index: 3;
+  &.is-stage {
+    z-index: 2;
+  }
+
+  &.is-active {
+    z-index: 3;
+  }
+
+  &.is-card.is-active {
+    width: var(--width);
+  }
 }
 </style>

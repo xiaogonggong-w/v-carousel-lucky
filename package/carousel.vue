@@ -1,25 +1,27 @@
 <template>
   <div class="Carousel" ref="carouselRoot" @mouseenter="mouseEnterEvent" @mouseleave="mouseLeaveEvent"
-    :style="{ width: containerWidth, height: containerHeight }">
-    <slot></slot>
+    :style="{ width: width }">
+    <div class="carousel-container" :style="{ height: height }">
+      <slot></slot>
+    </div>
 
     <div class="direction-container">
-      <Transition name="left-arrow" v-show="isDirection && state.showDirection">
-        <div class="prev" @click="prevHandleClick">
+      <Transition name="left-arrow">
+        <div class="prev" @click="prevHandleClick" v-show="isDirection && state.showDirection">
           <i class="iconfont icon-anniu_jiantouxiangzuo_o"></i>
         </div>
       </Transition>
-      <Transition name="right-arrow" v-show="isDirection && state.showDirection">
+      <Transition name="right-arrow">
 
-        <div class="next" @click="nextHandleClick">
+        <div class="next" @click="nextHandleClick" v-show="isDirection && state.showDirection">
           <i class="iconfont icon-anniu-jiantouxiangyou_o"></i>
         </div>
       </Transition>
 
     </div>
 
-    <Indicator v-show="state.showIndicator" @before-moving="beforeEmit" @after-moving="afterEmit"
-      @DictatorClick="DictatorClick" />
+    <Indicator v-show="state.showIndicator" @before-move="beforeEmit" @change-move="changeEmit"
+      @indicatorClick="indicatorClick" />
   </div>
 </template>
 
@@ -49,13 +51,19 @@ defineOptions({
 })
 const carouselRoot = ref(null)
 const slots = useSlots();
-const emit = defineEmits(["before-moving", "after-moving"])
+const emit = defineEmits(["before-move", "change-move"])
 const props = defineProps(allProps)
-const { containerWidth,
-  containerHeight,
+const {
+  width,
+  height,
   duration,
   directionMode,
   indicatorMode,
+  indicatorPosition,
+  indicatorTrigger,
+  scale,
+  cardWidth,
+  type
 } = toRefs(props)
 
 // const activeItem = ref(0)
@@ -68,6 +76,11 @@ const state = reactive({
   loop: props.loop,//是否循环
   type: props.type,//是卡片模式还是不是，
   delay: props.duration > props.delay ? props.delay / 1000 : 0.3,//滚动的时间
+  indicatorPosition,//指示灯位置 ，inside or outside
+  indicatorTrigger,
+  scale,
+  type,
+  cardWidth
 });
 const items = ref([])
 
@@ -93,10 +106,10 @@ const addItems = (item) => {
 
 
 const beforeEmit = (data) => {
-  emit("before-moving", data);
+  emit("before-move", data);
 };
-const afterEmit = (data) => {
-  emit("after-moving", data);
+const changeEmit = (data) => {
+  emit("change-move", data);
 };
 // 防抖执行
 const startDebounce = (direction) => {
@@ -121,7 +134,7 @@ const startDebounce = (direction) => {
       }
       break;
   }
-  afterEmit({ index: state.currentIndex, direction });
+  changeEmit({ index: state.currentIndex, direction });
 };
 // 
 const start = (direction) => debounce(() => startDebounce(direction), props.delay, true)
@@ -129,7 +142,7 @@ const start = (direction) => debounce(() => startDebounce(direction), props.dela
 
 
 // 指示灯
-const DictatorClick = (idx) => {
+const indicatorClick = (idx) => {
   // 如果是从 右 换到 左
   // if (idx < state.currentIndex) {
   //   changeLeftTranslate();
@@ -152,7 +165,7 @@ const mouseEnterEvent = () => {
 
 // 离开时开始
 const mouseLeaveEvent = () => {
-  autoplayFunc();
+  console.log();
   // 如果 hover 模式，鼠标移出后，隐藏 切换按钮
   if (directionMode.value === 'hover') {
     state.showDirection = false;
@@ -215,37 +228,20 @@ onBeforeUnmount(() => {
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .Carousel {
   position: relative;
   overflow: hidden;
+
+  .carousel-container {
+    position: relative;
+  }
 }
 
 .direction-container {
   z-index: 99;
 }
 
-/*
-  进入和离开动画可以使用不同
-  持续时间和速度曲线。
-*/
-.left-arrow-enter-active,
-.right-arrow-enter-active {
-  transition: all 0.3s ease-in;
-
-}
-
-.left-arrow-leave-active,
-.right-arrow-leave-active {
-  transition: all 0.3s ease-out;
-}
-
-.left-arrow-enter-from,
-.left-arrow-leave-to,
-.right-arrow-enter-from,
-.right-arrow-leave-to {
-  opacity: 0;
-}
 
 
 .direction {
@@ -255,9 +251,9 @@ onBeforeUnmount(() => {
 .prev,
 .next {
   position: absolute;
-  color: white;
+
   cursor: pointer;
-  transform: translateY(-50%);
+  margin-top: -20px;
   top: 50%;
   text-align: center;
   z-index: inherit;
@@ -269,6 +265,11 @@ i {
   font-weight: bold;
   font-size: 40px;
   line-height: 40px;
+
+  &:hover {
+    color: #fff;
+
+  }
 }
 
 .next {
@@ -277,5 +278,27 @@ i {
 
 .prev {
   left: 20px;
+}
+
+/*
+  进入和离开动画可以使用不同
+  持续时间和速度曲线。
+*/
+.left-arrow-enter-active,
+.right-arrow-enter-active,
+.left-arrow-leave-active,
+.right-arrow-leave-active {
+  transition: all 0.4s ease-out;
+}
+
+.left-arrow-enter-from,
+.left-arrow-leave-to {
+  transform: translate(-20px);
+}
+
+.right-arrow-enter-from,
+.right-arrow-leave-to {
+  opacity: 0;
+  transform: translate(20px);
 }
 </style>
