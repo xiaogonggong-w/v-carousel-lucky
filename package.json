@@ -4,7 +4,7 @@
     "dist"
   ],
   "private": false,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "vue3版本的走马灯",
   "main": "dist/lib.umd.js",
   "module": "dist/lib.es.js",
@@ -49,6 +49,7 @@
     "@vitejs/plugin-vue": "^3.0.3",
     "@vue/test-utils": "2.0.0-rc.18",
     "gh-pages": "^4.0.0",
+    "happy-dom": "^6.0.4",
     "sass": "^1.54.8",
     "unplugin-vue-define-options": "^0.11.1",
     "vite": "^3.0.7",

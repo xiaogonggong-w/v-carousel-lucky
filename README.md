@@ -1,6 +1,7 @@
 # v-carousel-lucky
 `vue3`版本的走马灯
-
+# 在线demo
+[v-carousel-lucky](https://xiaogonggong-w.github.io/v-carousel-lucky/)
 # 安装
 ```
 npm install v-carousel-lucky --save
@@ -108,8 +109,8 @@ function afterMoving(after) {
 |       type        |          carousel的类型          |      card      |      -      |
 |       loop        |           是否循环轮播           |   true/false   |    true     |
 |       delay       |         切换过渡时的事件         |       -        |     300     |
-|       scale       |         幻灯片缩小的比例         |       小于1       |     0.8     |
-|       cardWidth       |         激活幻灯片的宽度         |       小于整体宽度       |     50%     |
+|       scale       |         幻灯片缩小的比例         |     小于1      |     0.8     |
+|     cardWidth     |         激活幻灯片的宽度         |  小于整体宽度  |     50%     |
 
 # Event
 

@@ -1,71 +1,76 @@
-import { defineComponent as V, inject as B, reactive as H, watch as z, unref as l, openBlock as C, createElementBlock as b, Fragment as re, renderList as ae, normalizeStyle as P, normalizeClass as K, createCommentVNode as se, ref as m, useSlots as ce, toRefs as Q, provide as X, onMounted as Z, nextTick as le, onBeforeUnmount as ie, renderSlot as ee, createElementVNode as w, withDirectives as A, createVNode as R, Transition as Y, withCtx as q, vShow as O, pushScopeId as ue, popScopeId as de, computed as G } from "vue";
-let h, J;
-function fe(r, i, o) {
+import { defineComponent as z, inject as j, reactive as F, watch as H, unref as c, openBlock as w, createElementBlock as S, normalizeClass as U, Fragment as ie, renderList as ue, normalizeStyle as N, createCommentVNode as de, ref as y, useSlots as fe, toRefs as _e, provide as q, onMounted as Z, nextTick as pe, onBeforeUnmount as ve, createElementVNode as x, renderSlot as ee, createVNode as P, Transition as G, withCtx as J, withDirectives as M, vShow as L, pushScopeId as he, popScopeId as ye, computed as K } from "vue";
+let m, Q;
+function ge(r, u, n) {
   return function() {
-    let a = this, p = arguments;
-    if (h && clearTimeout(h), o) {
-      let d = !h;
-      h = setTimeout(function() {
-        h = null;
-      }, i), d && (J = r.apply(a, p));
+    let s = this, a = arguments;
+    if (m && clearTimeout(m), n) {
+      let v = !m;
+      m = setTimeout(function() {
+        m = null;
+      }, u), v && (Q = r.apply(s, a));
     } else
-      h = setTimeout(function() {
-        r.apply(a, p);
-      }, i);
-    return J;
+      m = setTimeout(function() {
+        r.apply(s, a);
+      }, u);
+    return Q;
   }();
 }
-const W = (r, i) => {
-  const o = r.__vccOpts || r;
-  for (const [u, a] of i)
-    o[u] = a;
-  return o;
-}, _e = {
-  key: 0,
-  class: "indicator"
-}, pe = ["onClick"], ve = V({
+const X = (r, u) => {
+  const n = r.__vccOpts || r;
+  for (const [d, s] of u)
+    n[d] = s;
+  return n;
+}, Ie = ["onClick", "onMouseenter"], me = z({
   name: "indicator"
-}), Ie = /* @__PURE__ */ Object.assign(ve, {
+}), xe = /* @__PURE__ */ Object.assign(me, {
   emits: ["indicatorClick", "before-move", "change-move"],
-  setup(r, { emit: i }) {
-    const o = B("carouselCtxState"), u = o.propsStaging, a = H({
-      len: o.CAROUSEL_ITEM_LEN,
+  setup(r, { emit: u }) {
+    const n = j("carouselCtxState"), d = n.propsStaging, s = F({
+      len: n.CAROUSEL_ITEM_LEN,
       globalIndex: 0,
-      indicator: u.indicator,
-      indicatorColor: u.indicatorColor,
-      indicatorActiveColor: u.indicatorActiveColor
+      indicator: d.indicator,
+      indicatorColor: d.indicatorColor,
+      indicatorActiveColor: d.indicatorActiveColor,
+      indicatorPosition: d.indicatorPosition,
+      indicatorTrigger: n.indicatorTrigger
     });
-    z(
-      () => o.currentIndex,
-      (d) => {
-        a.globalIndex = d;
+    H(
+      () => n.currentIndex,
+      (f) => {
+        s.globalIndex = f;
       }
     );
-    const p = (d) => {
-      if (d !== a.globalIndex) {
-        let f = "next";
-        d > a.globalIndex ? f = "next" : f = "prev", i("before-move", { index: a.globalIndex, direction: f }), i("indicatorClick", d), i("change-move", { index: d, direction: f });
+    const a = (f) => {
+      if (f !== s.globalIndex) {
+        let p = "next";
+        f > s.globalIndex ? p = "next" : p = "prev", u("before-move", { index: s.globalIndex, direction: p }), u("indicatorClick", f), u("change-move", { index: f, direction: p });
       }
+    }, v = (f) => {
+      s.indicatorTrigger === "hover" && a(f);
     };
-    return (d, f) => l(a).indicator ? (C(), b("div", _e, [
-      (C(!0), b(re, null, ae(l(a).len, (_) => (C(), b("span", {
+    return (f, p) => c(s).indicator ? (w(), S("div", {
+      key: 0,
+      class: U(["indicator", c(s).indicatorPosition === "inside" ? "absolute" : "static"])
+    }, [
+      (w(!0), S(ie, null, ue(c(s).len, (_) => (w(), S("span", {
         key: _,
-        style: P({
-          width: l(a).globalIndex === _ - 1 ? "20px" : ""
+        style: N({
+          width: c(s).globalIndex === _ - 1 ? "20px" : ""
         }),
-        onClick: (I) => p(_ - 1),
-        class: K(l(a).globalIndex === _ - 1 ? "active" : "normal")
-      }, null, 14, pe))), 128))
-    ])) : se("", !0);
+        onClick: (g) => a(_ - 1),
+        onMouseenter: (g) => v(_ - 1),
+        class: U(c(s).globalIndex === _ - 1 ? "active" : "normal")
+      }, null, 46, Ie))), 128))
+    ], 2)) : de("", !0);
   }
-}), me = /* @__PURE__ */ W(Ie, [["__scopeId", "data-v-c2c4caa3"]]), ye = {
-  containerWidth: {
+}), Ce = /* @__PURE__ */ X(xe, [["__scopeId", "data-v-2625b473"]]), b = 0.8, be = {
+  width: {
     type: String,
-    default: "100%"
+    default: "400px"
   },
-  containerHeight: {
+  height: {
     type: String,
-    default: "100%"
+    default: "300px"
   },
   duration: {
     type: Number,
@@ -95,6 +100,14 @@ const W = (r, i) => {
     type: String,
     default: "always"
   },
+  indicatorPosition: {
+    type: String,
+    default: "inside"
+  },
+  indicatorTrigger: {
+    type: String,
+    default: "hover"
+  },
   type: {
     type: String,
     validator: (r) => ["", "card"].includes(r),
@@ -107,203 +120,221 @@ const W = (r, i) => {
   delay: {
     type: Number,
     default: 300
+  },
+  scale: {
+    type: Number,
+    default: b
+  },
+  cardWidth: {
+    type: String,
+    default: "50%"
   }
 };
-const te = (r) => (ue("data-v-097fc2bf"), r = r(), de(), r), he = { class: "direction-container" }, xe = /* @__PURE__ */ te(() => /* @__PURE__ */ w("i", { class: "iconfont icon-anniu_jiantouxiangzuo_o" }, null, -1)), ge = [
-  xe
-], Ce = /* @__PURE__ */ te(() => /* @__PURE__ */ w("i", { class: "iconfont icon-anniu-jiantouxiangyou_o" }, null, -1)), be = [
-  Ce
-], we = V({
+const te = (r) => (he("data-v-d4698b8c"), r = r(), ye(), r), we = { class: "direction-container" }, Se = /* @__PURE__ */ te(() => /* @__PURE__ */ x("i", { class: "iconfont icon-anniu_jiantouxiangzuo_o" }, null, -1)), Ee = [
+  Se
+], ke = /* @__PURE__ */ te(() => /* @__PURE__ */ x("i", { class: "iconfont icon-anniu-jiantouxiangyou_o" }, null, -1)), Te = [
+  ke
+], Me = z({
   name: "Carousel"
-}), Se = /* @__PURE__ */ Object.assign(we, {
-  props: ye,
+}), Le = /* @__PURE__ */ Object.assign(Me, {
+  props: be,
   emits: ["before-move", "change-move"],
-  setup(r, { emit: i }) {
-    const o = r, u = m(null), a = ce(), {
-      containerWidth: p,
-      containerHeight: d,
+  setup(r, { emit: u }) {
+    const n = r, d = y(null), s = fe(), {
+      width: a,
+      height: v,
       duration: f,
-      directionMode: _,
-      indicatorMode: I
-    } = Q(o), t = H({
-      CAROUSEL_ITEM_LEN: a.default()[0].children.length,
-      propsStaging: o,
-      currentIndex: o.initIndex,
+      directionMode: p,
+      indicatorMode: _,
+      indicatorPosition: g,
+      indicatorTrigger: $,
+      scale: R,
+      cardWidth: A,
+      type: D
+    } = _e(n), t = F({
+      CAROUSEL_ITEM_LEN: s.default()[0].children.length,
+      propsStaging: n,
+      currentIndex: n.initIndex,
       showDirection: !0,
       showIndicator: !0,
-      loop: o.loop,
-      type: o.type,
-      delay: o.duration > o.delay ? o.delay / 1e3 : 0.3
-    }), y = m([]);
-    let x = null;
-    const S = o.direction;
-    z(() => t.currentIndex, (s, L) => {
-      $(L);
+      loop: n.loop,
+      type: n.type,
+      delay: n.duration > n.delay ? n.delay / 1e3 : 0.3,
+      indicatorPosition: g,
+      indicatorTrigger: $,
+      scale: R,
+      type: D,
+      cardWidth: A
+    }), C = y([]);
+    let e = null;
+    const o = n.direction;
+    H(() => t.currentIndex, (l, T) => {
+      B(T);
     });
-    const E = () => {
-      x = setInterval(() => {
-        n("next");
+    const i = () => {
+      e = setInterval(() => {
+        O("next");
       }, f.value);
-    }, T = (s) => {
-      y.value.push(s);
-    }, k = (s) => {
-      i("before-move", s);
-    }, M = (s) => {
-      i("change-move", s);
-    }, e = (s) => {
-      switch (k({ index: t.currentIndex, direction: s }), s) {
+    }, h = (l) => {
+      C.value.push(l);
+    }, I = (l) => {
+      u("before-move", l);
+    }, E = (l) => {
+      u("change-move", l);
+    }, k = (l) => {
+      switch (I({ index: t.currentIndex, direction: l }), l) {
         case "prev":
-          (t.currentIndex > 0 || o.loop) && (t.currentIndex -= 1), t.currentIndex <= -1 && (t.currentIndex = t.CAROUSEL_ITEM_LEN - 1);
+          (t.currentIndex > 0 || n.loop) && (t.currentIndex -= 1), t.currentIndex <= -1 && (t.currentIndex = t.CAROUSEL_ITEM_LEN - 1);
           break;
         case "next":
-          (t.currentIndex < t.CAROUSEL_ITEM_LEN - 1 || o.loop) && (t.currentIndex += 1), t.currentIndex >= t.CAROUSEL_ITEM_LEN && (t.currentIndex = 0);
+          (t.currentIndex < t.CAROUSEL_ITEM_LEN - 1 || n.loop) && (t.currentIndex += 1), t.currentIndex >= t.CAROUSEL_ITEM_LEN && (t.currentIndex = 0);
           break;
       }
-      M({ index: t.currentIndex, direction: s });
-    }, n = (s) => fe(() => e(s), o.delay, !0), c = (s) => {
-      t.currentIndex = s, $();
-    }, v = () => {
-      F(), _.value === "hover" && (t.showDirection = !0), I.value === "hover" && (t.showIndicator = !0);
-    }, g = () => {
-      E(), _.value === "hover" && (t.showDirection = !1), I.value === "hover" && (t.showIndicator = !1);
-    }, N = () => {
-      n("prev");
-    }, D = () => {
-      n("next");
+      E({ index: t.currentIndex, direction: l });
+    }, O = (l) => ge(() => k(l), n.delay, !0), ne = (l) => {
+      t.currentIndex = l, B();
+    }, re = () => {
+      Y(), p.value === "hover" && (t.showDirection = !0), _.value === "hover" && (t.showIndicator = !0);
+    }, ae = () => {
+      console.log(), p.value === "hover" && (t.showDirection = !1), _.value === "hover" && (t.showIndicator = !1);
+    }, se = () => {
+      O("prev");
+    }, ce = () => {
+      O("next");
     };
-    function F() {
-      clearInterval(x), x = null;
+    function Y() {
+      clearInterval(e), e = null;
     }
-    const $ = (s) => {
-      y.value.forEach((L, oe) => {
-        L.setItemStyle(oe, t.currentIndex, s);
+    const B = (l) => {
+      C.value.forEach((T, le) => {
+        T.setItemStyle(le, t.currentIndex, l);
       });
     };
-    return X("carouselCtxState", t), X("instance", {
-      items: y,
-      addItems: T,
-      carouselRoot: u
+    return q("carouselCtxState", t), q("instance", {
+      items: C,
+      addItems: h,
+      carouselRoot: d
     }), Z(async () => {
-      await le(), $(), o.autoplay && E(), _.value === "hover" && (t.showDirection = !1), I.value === "hover" && (t.showIndicator = !1);
-    }), ie(() => {
-      F();
-    }), (s, L) => (C(), b("div", {
+      await pe(), B(), n.autoplay && i(), p.value === "hover" && (t.showDirection = !1), _.value === "hover" && (t.showIndicator = !1);
+    }), ve(() => {
+      Y();
+    }), (l, T) => (w(), S("div", {
       class: "Carousel",
       ref_key: "carouselRoot",
-      ref: u,
-      onMouseenter: v,
-      onMouseleave: g,
-      style: P({ width: l(p), height: l(d) })
+      ref: d,
+      onMouseenter: re,
+      onMouseleave: ae,
+      style: N({ width: c(a) })
     }, [
-      ee(s.$slots, "default", {}, void 0, !0),
-      w("div", he, [
-        A(R(Y, { name: "left-arrow" }, {
-          default: q(() => [
-            w("div", {
+      x("div", {
+        class: "carousel-container",
+        style: N({ height: c(v) })
+      }, [
+        ee(l.$slots, "default", {}, void 0, !0)
+      ], 4),
+      x("div", we, [
+        P(G, { name: "left-arrow" }, {
+          default: J(() => [
+            M(x("div", {
               class: "prev",
-              onClick: N
-            }, ge)
+              onClick: se
+            }, Ee, 512), [
+              [L, c(o) && c(t).showDirection]
+            ])
           ]),
           _: 1
-        }, 512), [
-          [O, l(S) && l(t).showDirection]
-        ]),
-        A(R(Y, { name: "right-arrow" }, {
-          default: q(() => [
-            w("div", {
+        }),
+        P(G, { name: "right-arrow" }, {
+          default: J(() => [
+            M(x("div", {
               class: "next",
-              onClick: D
-            }, be)
+              onClick: ce
+            }, Te, 512), [
+              [L, c(o) && c(t).showDirection]
+            ])
           ]),
           _: 1
-        }, 512), [
-          [O, l(S) && l(t).showDirection]
-        ])
+        })
       ]),
-      A(R(me, {
-        onBeforeMoving: k,
-        onAfterMoving: M,
-        onindicatorClick: c
+      M(P(Ce, {
+        onBeforeMove: I,
+        onChangeMove: E,
+        onIndicatorClick: ne
       }, null, 512), [
-        [O, l(t).showIndicator]
+        [L, c(t).showIndicator]
       ])
     ], 36));
   }
-}), j = /* @__PURE__ */ W(Se, [["__scopeId", "data-v-097fc2bf"]]);
-const Ee = V({
+}), W = /* @__PURE__ */ X(Le, [["__scopeId", "data-v-d4698b8c"]]);
+const Ne = z({
   name: "CarouselItem"
-}), ke = /* @__PURE__ */ Object.assign(Ee, {
-  props: {
-    idx: {
-      type: Number,
-      default: 0
-    }
-  },
+}), $e = /* @__PURE__ */ Object.assign(Ne, {
   setup(r) {
-    Q(r);
-    const o = H({
+    const u = F({
       globalIndex: 0
-    }), u = 0.8;
-    let a = m(1), p = m(0), d = m("X");
-    const f = B("carouselCtxState");
-    let _ = m(!1), I = m(!1);
-    const t = B("instance");
-    z(
-      () => f.currentIndex,
+    });
+    let n = y(1), d = y(0), s = y("X");
+    const a = j("carouselCtxState");
+    let v = y(!1), f = y(!1), p = y(!1);
+    const _ = j("instance");
+    H(
+      () => a.currentIndex,
       (e) => {
-        o.globalIndex = e;
+        u.globalIndex = e;
       }
     );
-    const y = (e, n) => n ? e : "", x = G(() => {
-      const e = `translate${d.value === "Y" ? "Y" : "X"}`, n = `scale(${a.value})`;
+    const g = (e, o) => o ? e : "", $ = K(() => {
+      const e = `translate${s.value === "Y" ? "Y" : "X"}`, o = `scale(${n.value})`;
       return {
-        transform: [`${e}(${p.value}px)`, n].join(" ")
+        transform: [`${e}(${d.value}px)`, o].join(" ")
       };
-    }), S = G(() => {
+    }), R = K(() => {
       var e;
-      return ((e = t.carouselRoot.value) == null ? void 0 : e.offsetWidth) || 0;
-    }), E = (e, n, c) => {
-      const v = c - 1, g = n - 1, N = n + 1, D = c / 2;
-      return n === 0 && e === v ? -1 : n === v && e === 0 ? c : e < g && n - e >= D ? c + 1 : e > N && e - n >= D ? -2 : e;
-    }, T = (e, n) => {
-      const c = t.carouselRoot.value;
-      return c ? c.offsetWidth * (e - n) : 0;
-    }, k = (e, n, c) => I.value ? c * ((2 - u) * (e - n) + 1) / 4 : e < n ? -(1 + u) * c / 4 : (3 + u) * c / 4, M = (e, n, c) => {
-      const v = t.items.value.length || 0, g = _.value = e === n;
-      !_.value && v > 2 && f.loop && (e = E(e, n, v)), f.type === "card" ? (I.value = Math.round(Math.abs(e - n)) <= 1, p.value = k(e, n, S.value), a.value = g ? 1 : u) : p.value = T(e, n);
+      return ((e = _.carouselRoot.value) == null ? void 0 : e.offsetWidth) || 0;
+    }), A = (e, o, i) => {
+      const h = i - 1, I = o - 1, E = o + 1, k = i / 2;
+      return o === 0 && e === h ? -1 : o === h && e === 0 ? i : e < I && o - e >= k ? i + 1 : e > E && e - o >= k ? -2 : e;
+    }, D = (e, o) => {
+      const i = _.carouselRoot.value;
+      return i ? i.offsetWidth * (e - o) : 0;
+    }, t = (e, o, i) => f.value ? e === o && a.type === "card" && a.cardWidth && a.cardWidth !== "50%" ? (i - parseInt(a.cardWidth.replace("px", ""))) / 2 : i * ((2 - b) * (e - o) + 1) / 4 : e < o ? -(1 + b) * i / 4 : (console.log(e, o), (3 + b) * i / 4), C = (e, o, i) => {
+      const h = _.items.value.length || 0, I = v.value = e === o;
+      !v.value && h > 2 && a.loop && (e = A(e, o, h)), a.type === "card" ? (f.value = Math.round(Math.abs(e - o)) <= 1, d.value = t(e, o, R.value), console.log(d.value), n.value = I ? 1 : a.scale > 1 ? b : a.scale) : d.value = D(e, o), p.value = !0;
     };
     return Z(() => {
-      t.addItems({
-        setItemStyle: M
+      _.addItems({
+        setItemStyle: C
       });
-    }), (e, n) => (C(), b("div", {
-      class: K(["CarouselItem", [y("is-active", l(_)), y("is-card", l(f).type === "card")]]),
-      style: P([l(x), { "--delay": l(f).delay + "s" }])
+    }), (e, o) => M((w(), S("div", {
+      class: U(["carousel-item", [g("is-active", c(v)), g("is-stage", c(f)), g("is-card", c(a).type === "card")]]),
+      style: N([c($), { "--delay": c(a).delay + "s" }, { "--width": c(a).cardWidth }])
     }, [
       ee(e.$slots, "default", {}, void 0, !0)
-    ], 6));
+    ], 6)), [
+      [L, c(p)]
+    ]);
   }
-}), U = /* @__PURE__ */ W(ke, [["__scopeId", "data-v-ae21e3ba"]]);
-j.install = (r) => {
-  r.component("Carousel", j);
+}), V = /* @__PURE__ */ X($e, [["__scopeId", "data-v-070eee51"]]);
+W.install = (r) => {
+  r.component("Carousel", W);
 };
-U.install = (r) => {
-  r.component("CarouselItem", U);
+V.install = (r) => {
+  r.component("CarouselItem", V);
 };
-const Me = [
-  j,
-  U
-], ne = (r) => {
-  Me.forEach((i) => {
-    r.use(i);
+const Re = [
+  W,
+  V
+], oe = (r) => {
+  Re.forEach((u) => {
+    r.use(u);
   });
 };
-typeof window < "u" && window.Vue && ne(window.Vue);
-const Le = {
-  install: ne
+typeof window < "u" && window.Vue && oe(window.Vue);
+const De = {
+  install: oe
 };
 export {
-  j as Carousel,
-  U as CarouselItem,
-  Le as default
+  W as Carousel,
+  V as CarouselItem,
+  De as default
 };
