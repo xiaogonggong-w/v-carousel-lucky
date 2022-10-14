@@ -77,14 +77,5 @@
 }
 </style>
   ```
-<!-- </details> -->
 
-**初次之外还有使用卡片化模式**
-  <div class="app">
-    <carousel type="card" >
-      <carousel-item v-for="item in 3" :key="item" class="item">
-        <div class="h">{{ item }}</div>
-      </carousel-item>
-    </carousel>
-  </div>
   
