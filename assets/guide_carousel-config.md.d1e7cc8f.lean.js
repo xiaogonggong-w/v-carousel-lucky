@@ -1,0 +1,1 @@
+import{_ as t,c as e,o as n,e as d}from"./app.c6a59077.js";const h=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"guide/carousel-config.md"}'),l={name:"guide/carousel-config.md"},r=d("",1),a=[r];function i(s,c,g,y,x,o){return n(),e("div",null,a)}const u=t(l,[["render",i]]);export{h as __pageData,u as default};
