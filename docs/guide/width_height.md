@@ -1,9 +1,4 @@
 <style>
-.app {
-  width: 500px;
-  height: 300px;
-}
-
 .h,
 .item {
   width: 100%;
@@ -27,22 +22,19 @@
 
 # 在Vue中使用
 ## 基础用法
-**使用carousel和carousel-item就能得到一个基础的走马灯**
+**可以自定义width和height**
  <div class="app">
-    <carousel>
+    <carousel width="600px" height='600px'>
       <carousel-item v-for="item in 3" :key="item" class="item">
         <div class="h">{{ item }}</div>
       </carousel-item>
     </carousel>
   </div>
 
-<!-- <details>
-  <summary>查看代码</summary> -->
-
   ```vue
 <template>
-  <div class="app">
-    <carousel>
+ <div class="app">
+    <carousel width="600px" height='600px' >
       <carousel-item v-for="item in 3" :key="item" class="item">
         <div class="h">{{ item }}</div>
       </carousel-item>
@@ -51,10 +43,6 @@
 </template>
 
 <style scoped>
-.app {
-  width: 100%;
-  height: 300px;
-}
 
 .h,
 .item {
@@ -77,14 +65,5 @@
 }
 </style>
   ```
-<!-- </details> -->
 
-**初次之外还有使用卡片化模式**
-  <div class="app">
-    <carousel type="card" >
-      <carousel-item v-for="item in 3" :key="item" class="item">
-        <div class="h">{{ item }}</div>
-      </carousel-item>
-    </carousel>
-  </div>
   

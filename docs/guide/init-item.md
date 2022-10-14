@@ -1,9 +1,4 @@
 <style>
-.app {
-  width: 500px;
-  height: 300px;
-}
-
 .h,
 .item {
   width: 100%;
@@ -27,34 +22,63 @@
 
 # 在Vue中使用
 ## 基础用法
-**使用carousel和carousel-item就能得到一个基础的走马灯**
+**设置当前激活的幻灯片是第几个**
  <div class="app">
-    <carousel>
+    <carousel 
+    :width="width" 
+    :height='height' 
+    :duration="duration" 
+    :autoplay="autoplay"
+    :initIndex="initIndex"
+    >
       <carousel-item v-for="item in 3" :key="item" class="item">
         <div class="h">{{ item }}</div>
       </carousel-item>
     </carousel>
   </div>
 
-<!-- <details>
-  <summary>查看代码</summary> -->
+  <script>
+     export default{
+        data(){
+            return {
+               width:"600px",
+               height:"600px",
+               duration:1000,
+               autoplay:false,
+               initIndex:2
+            }
+        }
+     }
+    </script>
 
   ```vue
 <template>
-  <div class="app">
-    <carousel>
+    <carousel  
+    :width="width" 
+    :height='height' 
+    :duration="duration" 
+    :autoplay="autoplay"
+    :initIndex="initIndex"
+    >
       <carousel-item v-for="item in 3" :key="item" class="item">
         <div class="h">{{ item }}</div>
       </carousel-item>
     </carousel>
-  </div>
 </template>
-
+ <script>
+     export default{
+        data(){
+            return {
+                width:"600px",
+                height:"600px",
+                duration:1000,
+                autoplay:false,
+                initIndex:2
+            }
+        }
+     }
+    </script>
 <style scoped>
-.app {
-  width: 100%;
-  height: 300px;
-}
 
 .h,
 .item {
@@ -77,14 +101,5 @@
 }
 </style>
   ```
-<!-- </details> -->
 
-**初次之外还有使用卡片化模式**
-  <div class="app">
-    <carousel type="card" >
-      <carousel-item v-for="item in 3" :key="item" class="item">
-        <div class="h">{{ item }}</div>
-      </carousel-item>
-    </carousel>
-  </div>
   

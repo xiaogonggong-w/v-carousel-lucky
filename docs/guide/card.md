@@ -27,22 +27,19 @@
 
 # 在Vue中使用
 ## 基础用法
-**使用carousel和carousel-item就能得到一个基础的走马灯**
+**将type设置为card即可得到卡片模式**
  <div class="app">
-    <carousel>
+   <carousel type="card" >
       <carousel-item v-for="item in 3" :key="item" class="item">
         <div class="h">{{ item }}</div>
       </carousel-item>
     </carousel>
   </div>
 
-<!-- <details>
-  <summary>查看代码</summary> -->
-
   ```vue
 <template>
-  <div class="app">
-    <carousel>
+ <div class="app">
+    <carousel type="card" >
       <carousel-item v-for="item in 3" :key="item" class="item">
         <div class="h">{{ item }}</div>
       </carousel-item>
@@ -77,14 +74,5 @@
 }
 </style>
   ```
-<!-- </details> -->
 
-**初次之外还有使用卡片化模式**
-  <div class="app">
-    <carousel type="card" >
-      <carousel-item v-for="item in 3" :key="item" class="item">
-        <div class="h">{{ item }}</div>
-      </carousel-item>
-    </carousel>
-  </div>
   
