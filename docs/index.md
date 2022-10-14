@@ -8,9 +8,6 @@ hero:
   name: v-carousel-lucky
   text: Vue3版本的跑马灯
   tagline: 没啥特点仅供学习
-  image: 
-    src: '/logo.jpg'
-    alt: v-carousel-lucky
   actions:
     - theme: brand
       text: 开始
